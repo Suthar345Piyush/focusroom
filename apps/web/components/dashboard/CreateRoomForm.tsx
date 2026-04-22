@@ -58,7 +58,7 @@ export function CreateRoomForm() {
 
 
      return (
-
+ 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
 
           <Input label="Room name" placeholder="Enter the room name" error={errors.name?.message} hint="Letters, numbers, spaces, dashes allowed" {...register("name")}/>
