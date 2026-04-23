@@ -21,7 +21,7 @@ interface StatsCardProps {
 }
 
 
-export function StatusCard({stats} : StatsCardProps) {
+export function StatsCard({stats} : StatsCardProps) {
     
    return (
 
