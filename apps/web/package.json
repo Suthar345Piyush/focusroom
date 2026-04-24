@@ -1,14 +1,12 @@
 {
-  "name": "focusroom",
+  "name": "@focusroom/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:web": "pnpm --filter @focusroom/web dev",
-    "dev:server" : "pnpm --filter @focusroom/server dev",
-    "dev" : "concurrently \"pnpm dev:web\" \"pnpm dev:server\"",
+    "dev":   "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint":  "next lint"
   },
   "dependencies": {
     "@clerk/express": "^2.1.5",

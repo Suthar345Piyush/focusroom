@@ -17,6 +17,14 @@
 /.next/
 /out/
 
+# nextjs .next file and clerk file  
+
+/apps/web/.next
+/apps/web/.clerk
+
+
+
+
 # production
 /build
 

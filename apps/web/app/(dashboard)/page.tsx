@@ -12,7 +12,7 @@ export const metadata : Metadata = {title : "Dashboard"};
 
 export default async function DashboardPage() {
     
-    // const {userId} = auth();
+    const {userId} = await auth();
 
 
 
