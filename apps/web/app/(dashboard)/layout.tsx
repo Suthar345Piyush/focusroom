@@ -1,4 +1,4 @@
-// using sidebar in this web/app/(dashboard)/layout 
+// using sidebar component  in this web/app/(dashboard)/layout 
 
 
 import { Sidebar } from "@/components/dashboard/Sidebar";

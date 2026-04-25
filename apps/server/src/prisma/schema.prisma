@@ -1,0 +1,130 @@
+// prisma schema  
+// Models - user, room, rommSession, leaderboardentries 
+
+generator client {
+   provider = "prisma-client-js"   
+}
+
+datasource db {
+   provider = "postgresql"
+   url = env("DATABASE_URL")
+
+   // neon connection pooling for production 
+   directUrl =  env("DIRECT_URL")
+}
+
+
+// user model 
+
+model User {
+    id   String @id @default(cuid(2))
+    clerkId String @unique
+    username String @unique
+    displayName String
+    avatarUrl String?
+    bio String?
+    totalScore Int @default(0)
+    roomsWon Int @default(0)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+
+    sessions RoomSession[]
+    leaderboardEntries LeaderboardEntry[]
+
+
+    // indexes
+    @@index([clerkId])
+    @@index([totalScore])
+}
+
+
+
+ // Room model 
+
+model Room {
+    id String @id @default(cuid(2))
+    inviteCode String @unique
+    hostId String
+    name String
+    pomodoroMinutes Int @default(25)
+    breakMinutes Int @default(5)
+    kickAfterSecs Int @default(120)
+    maxUsers Int @default(10)
+    status RoomStatus @default(WAITING)
+    createdAt DateTime @default(now())
+    closedAt DateTime?
+
+    sessions RoomSession[]
+    leaderboardEntries LeaderboardEntry[]
+
+
+    @@index([inviteCode])
+    @@index([status])
+    @@index([hostId])
+}
+
+
+
+// room session model 
+
+model RoomSession {
+      id String @id @default(cuid(2))
+      roomId String 
+      userId String
+      joinedAt DateTime @default(now())
+      leftAt DateTime? 
+      isWinner Boolean @default(false)
+
+
+      // some relations with room and user model
+
+      room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+      user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
+      @@unique([roomId, userId])
+      @@index([roomId])
+      @@index([userId])
+
+}
+
+
+
+// leader board entry model  
+
+model  LeaderboardEntry {
+    id String @id @default(cuid(2))
+    userId String
+    roomId String
+    score Int
+    rank Int
+    createdAt DateTime @default(now())
+
+    // relations with user and room 
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+
+    @@unique([roomId, userId])
+    @@index([userId])
+    @@index([score(sort : Desc)])
+
+}
+
+
+
+enum RoomStatus {
+   WAITING
+   ACTIVE
+   CLOSED
+}
+
+
+
+
+
+
+
+
