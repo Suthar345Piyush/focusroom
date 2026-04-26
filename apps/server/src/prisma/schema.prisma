@@ -1,18 +1,14 @@
 // prisma schema  
 // Models - user, room, rommSession, leaderboardentries 
 
-generator client {
-   provider = "prisma-client-js"   
-}
+
+// generator client {
+//    provider = "prisma-client"   
+// }
 
 datasource db {
-   provider = "postgresql"
-   url = env("DATABASE_URL")
-
-   // neon connection pooling for production 
-   directUrl =  env("DIRECT_URL")
+     provider =  "postgresql"
 }
-
 
 // user model 
 
