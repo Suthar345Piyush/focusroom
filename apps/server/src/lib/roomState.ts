@@ -80,7 +80,7 @@ export function createLiveRoom(
 
 //read operation on live room - get 
 
-export function getLiveRoom(roomId : string) : LiveRoom | undefined {
+export function getLiveRoom(roomId : string) : LiveRoom | any {
       return rooms.get(roomId);
 }
 
