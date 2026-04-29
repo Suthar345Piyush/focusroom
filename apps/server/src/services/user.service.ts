@@ -5,11 +5,11 @@ import {prisma} from "../lib/prisma";
 export const userService = {
 
    async findByClerkId(clerkId : string) {
-     return prisma.user.findByClerkId({where : {clerkId}});
+     return prisma.user.findUnqiue({where : {clerkId}});
    },
 
    async findById(id : string) {
-     return prisma.user.findById({where : {id}});
+     return prisma.user.findUnqiue({where : {id}});
    },
 
 
